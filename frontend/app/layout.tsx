@@ -1,32 +1,44 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import { AppShell } from "@/components/layout/AppShell";
+import CustomCursor from "@/components/CustomCursor";
+import NetworkBackground from "@/components/NetworkBackground";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
   subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
-  title: "Silent Ledger — Privacy-First Bitcoin Payment Layer",
-  description: "Discover fresh Bitcoin payment addresses privately using Nostr, while keeping sensitive wallet analysis on the client.",
+  title: "Silent Ledger | Privacy-First Bitcoin Payment Layer",
+  description:
+    "Discover fresh Bitcoin payment addresses privately using Nostr, while keeping your transactions private.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${plexMono.variable}`}
     >
       <body className="min-h-full flex flex-col">
-        <AppShell>{children}</AppShell>
-      </body>
+  <NetworkBackground />
+  <CustomCursor />
+  <div className="app-content">
+    <AppShell>{children}</AppShell>
+  </div>
+</body>
     </html>
   );
 }

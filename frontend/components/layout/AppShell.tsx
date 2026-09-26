@@ -10,7 +10,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <ToastProvider>
-      <div className="flex min-h-screen flex-col bg-zinc-50">
+      <div className="flex min-h-screen flex-col bg-[#0a0d12]">
         <Header onMenuToggle={() => setMobileOpen((v) => !v)} />
         <div className="flex flex-1">
           <Sidebar open={mobileOpen} onClose={() => setMobileOpen(false)} />

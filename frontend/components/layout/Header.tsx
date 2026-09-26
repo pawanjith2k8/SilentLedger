@@ -43,8 +43,8 @@ export function Header({ onMenuToggle }: { onMenuToggle: () => void }) {
     health.status === "online" ? health.data.mempoolTestnet : "Checking backend...";
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-zinc-200 bg-white px-4">
-      <div className="flex items-center gap-3">
+  <header className="sticky top-0 z-30 flex h-14 items-center justify-between border-b border-cyan-400/10 bg-[#0a0d12]/90 px-4 backdrop-blur-md">
+    <div className="flex items-center gap-3">
         <button
           type="button"
           aria-label="Toggle navigation"
