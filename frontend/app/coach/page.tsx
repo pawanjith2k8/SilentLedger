@@ -19,9 +19,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white p-6">
-      <h2 className="text-sm font-semibold text-zinc-900">{title}</h2>
-      {description && <p className="mt-1 text-xs text-zinc-500">{description}</p>}
+    <section className="rounded-lg border border-cyan-500/15 bg-white/[0.03] p-6 shadow-[0_0_35px_-18px_rgba(34,211,238,0.45)] backdrop-blur-sm">
+      <h2 className="text-sm font-semibold text-slate-100">{title}</h2>
+      {description && <p className="mt-1 text-xs text-slate-500">{description}</p>}
       <div className="mt-4 space-y-4">{children}</div>
     </section>
   );
@@ -181,16 +181,16 @@ export default function CoachPage() {
 
   return (
     <div className="space-y-8">
-      <section aria-labelledby="coach-heading" className="rounded-lg border border-zinc-200 bg-white p-6">
-        <h1 id="coach-heading" className="text-xl font-semibold text-zinc-900">
+      <section aria-labelledby="coach-heading" className="rounded-lg border border-cyan-500/15 bg-white/[0.03] p-6 shadow-[0_0_35px_-18px_rgba(34,211,238,0.45)] backdrop-blur-sm">
+        <h1 id="coach-heading" className="text-xl font-semibold text-slate-100">
           AI Privacy Coach
         </h1>
-        <p className="mt-2 max-w-prose text-sm text-zinc-600">
+        <p className="mt-2 max-w-prose text-sm text-slate-400">
           Get plain-English explanations of your local privacy audit. The coach receives only your sanitized audit
           summary (score, grade, finding codes) — not raw UTXOs, private keys, or full transaction history. AI
           credentials stay on the backend.
         </p>
-        <p className="mt-2 text-xs text-zinc-500">
+        <p className="mt-2 text-xs text-slate-500">
           Analysis is grounded in your actual audit. If no finding exists (e.g., no dust), the coach will not invent one.
         </p>
       </section>
@@ -201,18 +201,18 @@ export default function CoachPage() {
         description="Grounded in real local audit. Only score, grade, flags, and summary are sent to the AI backend."
       >
         {!audit ? (
-          <div className="rounded-md border border-dashed border-zinc-200 bg-zinc-50 p-4">
-            <p className="text-sm text-zinc-700">No audit loaded.</p>
-            <p className="mt-1 text-sm text-zinc-600">Run a privacy analysis first, then ask the AI Coach to explain the findings.</p>
+          <div className="rounded-md border border-dashed border-slate-500/25 bg-white/[0.02] p-4">
+            <p className="text-sm text-slate-300">No audit loaded.</p>
+            <p className="mt-1 text-sm text-slate-400">Run a privacy analysis first, then ask the AI Coach to explain the findings.</p>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link href="/privacy" className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800">
+              <Link href="/privacy" className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors duration-200 hover:bg-cyan-500/20">
                 Go to Privacy Analysis
               </Link>
               <button
                 type="button"
                 onClick={() => handleLoadDemo("clean")}
                 disabled={demoLoading}
-                className="rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 disabled:opacity-50"
+                className="rounded-md border border-cyan-500/15 bg-white/[0.02] px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200 disabled:opacity-50"
               >
                 Load demo: Pristine
               </button>
@@ -220,44 +220,44 @@ export default function CoachPage() {
                 type="button"
                 onClick={() => handleLoadDemo("bad")}
                 disabled={demoLoading}
-                className="rounded-md border border-zinc-200 bg-white px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 disabled:opacity-50"
+                className="rounded-md border border-cyan-500/15 bg-white/[0.02] px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200 disabled:opacity-50"
               >
                 Load demo: Leaky
               </button>
             </div>
-            <p className="mt-2 text-xs text-zinc-500">Demo audits are from GET /api/scenarios/... — not your wallet.</p>
+            <p className="mt-2 text-xs text-slate-500">Demo audits are from GET /api/scenarios/... — not your wallet.</p>
           </div>
         ) : (
           <div className="space-y-3">
-            <div className="rounded-md border border-zinc-200 bg-zinc-50 p-4">
+            <div className="rounded-md border border-cyan-500/10 bg-white/[0.02] p-4">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-sm font-medium text-zinc-800">
+                <span className="rounded-full border border-cyan-500/15 bg-white/[0.03] px-3 py-1 text-sm font-medium text-slate-200">
                   Score {audit.score}/100 — {audit.grade}
                 </span>
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-slate-500">
                   Source: {auditSource === "session" ? "Last privacy analysis (session)" : auditSource === "demo-clean" ? "Demo: Pristine" : "Demo: Leaky"} •{" "}
                   {new Date(audit.analyzedAt).toLocaleString()}
                 </span>
                 <button
                   type="button"
                   onClick={handleClearAudit}
-                  className="ml-auto rounded-md border border-zinc-200 bg-white px-2 py-1 text-xs font-medium text-zinc-700 hover:bg-zinc-50"
+                  className="ml-auto rounded-md border border-cyan-500/15 bg-white/[0.02] px-2 py-1 text-xs font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200"
                 >
                   Clear
                 </button>
               </div>
               <dl className="mt-2 grid gap-1 text-xs sm:grid-cols-2">
                 <div>
-                  <dt className="text-zinc-500">UTXOs</dt>
-                  <dd className="text-zinc-700">{audit.summary.totalUtxos}</dd>
+                  <dt className="text-slate-500">UTXOs</dt>
+                  <dd className="text-slate-300">{audit.summary.totalUtxos}</dd>
                 </div>
                 <div>
-                  <dt className="text-zinc-500">Flags</dt>
-                  <dd className="text-zinc-700">{audit.flags.length ? audit.flags.map((f) => f.type).join(", ") : "None"}</dd>
+                  <dt className="text-slate-500">Flags</dt>
+                  <dd className="text-slate-300">{audit.flags.length ? audit.flags.map((f) => f.type).join(", ") : "None"}</dd>
                 </div>
               </dl>
-              <p className="mt-2 text-xs text-zinc-500">
-                Payload to AI: <code className="rounded bg-white px-1">score, grade, flags[type/severity/penalty/title/details], summary</code> — no
+              <p className="mt-2 text-xs text-slate-500">
+                Payload to AI: <code className="rounded bg-white/[0.06] px-1 text-cyan-300">score, grade, flags[type/severity/penalty/title/details], summary</code> — no
                 raw UTXOs, no private data.
               </p>
             </div>
@@ -267,14 +267,14 @@ export default function CoachPage() {
                 type="button"
                 onClick={handleExplainScore}
                 disabled={analyzeState.status === "loading"}
-                className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50"
+                className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors duration-200 hover:bg-cyan-500/20 disabled:opacity-50"
               >
                 {analyzeState.status === "loading" ? "Asking coach..." : "Explain my privacy score"}
               </button>
               <button
                 type="button"
                 onClick={() => handleLoadDemo(auditSource?.startsWith("demo") ? "bad" : "clean")}
-                className="rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50"
+                className="rounded-md border border-cyan-500/15 bg-white/[0.02] px-3 py-2 text-xs font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200"
               >
                 Switch demo
               </button>
@@ -282,7 +282,7 @@ export default function CoachPage() {
 
             {audit.flags.length > 0 && (
               <div className="space-y-2">
-                <p className="text-xs font-medium text-zinc-700">Explain individual finding:</p>
+                <p className="text-xs font-medium text-slate-300">Explain individual finding:</p>
                 <div className="flex flex-wrap gap-2">
                   {audit.flags.map((flag) => (
                     <button
@@ -290,7 +290,7 @@ export default function CoachPage() {
                       type="button"
                       onClick={() => handleExplainFlag(flag)}
                       disabled={analyzeState.status === "loading"}
-                      className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-700 hover:bg-zinc-50 disabled:opacity-50"
+                      className="rounded-full border border-cyan-500/15 bg-white/[0.02] px-3 py-1 text-xs font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200 disabled:opacity-50"
                     >
                       Why is {flag.type} a problem?
                     </button>
@@ -318,7 +318,7 @@ export default function CoachPage() {
                     });
                 }}
                 disabled={analyzeState.status === "loading"}
-                className="rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-700 hover:bg-zinc-50 disabled:opacity-50"
+                className="rounded-md border border-cyan-500/15 bg-white/[0.02] px-3 py-2 text-xs font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200 disabled:opacity-50"
               >
                 How can I improve?
               </button>
@@ -333,13 +333,13 @@ export default function CoachPage() {
           title="Coach Analysis"
           description="Facts from local audit are shown separately from AI explanations. AI does not override the audit."
         >
-          {analyzeState.status === "idle" && <p className="text-sm text-zinc-500">No analysis yet. Use the buttons above.</p>}
-          {analyzeState.status === "loading" && <p className="text-sm text-zinc-500">Asking the coach...</p>}
+          {analyzeState.status === "idle" && <p className="text-sm text-slate-500">No analysis yet. Use the buttons above.</p>}
+          {analyzeState.status === "loading" && <p className="text-sm text-slate-500">Asking the coach...</p>}
           {analyzeState.status === "error" && (
-            <div className="rounded-md border border-red-200 bg-red-50 p-3">
-              <p className="text-sm font-medium text-red-800">AI unavailable</p>
-              <p className="mt-1 text-sm text-red-700">{analyzeState.message}</p>
-              <p className="mt-1 text-xs text-zinc-600">
+            <div className="rounded-md border border-red-500/30 bg-red-500/10 p-3">
+              <p className="text-sm font-medium text-red-300">AI unavailable</p>
+              <p className="mt-1 text-sm text-red-300">{analyzeState.message}</p>
+              <p className="mt-1 text-xs text-slate-400">
                 This may be a backend or provider issue. Your local audit remains valid: score {audit.score}/100 —{" "}
                 {audit.grade}.
               </p>
@@ -347,23 +347,23 @@ export default function CoachPage() {
           )}
           {analyzeState.status === "success" && (
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs text-zinc-500">
+              <div className="flex items-center gap-2 text-xs text-slate-500">
                 <span>Provider: {analyzeState.data.provider}</span>
                 <span>•</span>
                 <span>{new Date(analyzeState.data.timestamp).toLocaleString()}</span>
               </div>
-              <div className="rounded-md border border-zinc-200 bg-zinc-50 p-4">
-                <p className="mb-2 text-xs font-medium text-zinc-700">Local audit facts (ground truth):</p>
-                <p className="text-xs text-zinc-600">
+              <div className="rounded-md border border-cyan-500/10 bg-white/[0.02] p-4">
+                <p className="mb-2 text-xs font-medium text-slate-300">Local audit facts (ground truth):</p>
+                <p className="text-xs text-slate-400">
                   Score {audit.score}/100 — {audit.grade} • Flags:{" "}
                   {audit.flags.length ? audit.flags.map((f) => `${f.type}(${f.severity})`).join(", ") : "None"} • UTXOs{" "}
                   {audit.summary.totalUtxos}
                 </p>
               </div>
-              <pre className="whitespace-pre-wrap break-words rounded-md border border-zinc-200 bg-white p-4 text-sm leading-relaxed text-zinc-800">
+              <pre className="whitespace-pre-wrap break-words rounded-md border border-cyan-500/10 bg-black/30 p-4 text-sm leading-relaxed text-slate-200">
                 {analyzeState.data.analysis}
               </pre>
-              <p className="text-xs text-zinc-500">Above is AI-generated explanation grounded in the local audit. Recommendations are suggestions, not guarantees.</p>
+              <p className="text-xs text-slate-500">Above is AI-generated explanation grounded in the local audit. Recommendations are suggestions, not guarantees.</p>
             </div>
           )}
         </Section>
@@ -372,9 +372,9 @@ export default function CoachPage() {
       {/* Chat */}
       <Section title="Ask the Coach" description="Chat grounded in your audit. Example questions provided. Empty audit shows guidance, not fabricated wallet data.">
         {!audit ? (
-          <div className="rounded-md border border-zinc-200 bg-zinc-50 p-4">
-            <p className="text-sm text-zinc-600">Run a privacy analysis first, then ask the AI Coach to explain the findings.</p>
-            <p className="mt-1 text-xs text-zinc-500">Chat without audit context would invent wallet information — blocked by design.</p>
+          <div className="rounded-md border border-cyan-500/10 bg-white/[0.02] p-4">
+            <p className="text-sm text-slate-400">Run a privacy analysis first, then ask the AI Coach to explain the findings.</p>
+            <p className="mt-1 text-xs text-slate-500">Chat without audit context would invent wallet information — blocked by design.</p>
           </div>
         ) : (
           <>
@@ -391,7 +391,7 @@ export default function CoachPage() {
                   key={q}
                   type="button"
                   onClick={() => handleExampleQuestion(q)}
-                  className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700 hover:bg-zinc-50"
+                  className="rounded-full border border-cyan-500/15 bg-white/[0.02] px-3 py-1 text-xs text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200"
                 >
                   {q}
                 </button>
@@ -399,14 +399,18 @@ export default function CoachPage() {
             </div>
 
             <div className="space-y-3">
-              <div className="max-h-64 space-y-2 overflow-auto rounded-md border border-zinc-200 bg-zinc-50 p-3">
+              <div className="max-h-64 space-y-2 overflow-auto rounded-md border border-cyan-500/10 bg-white/[0.02] p-3">
                 {chatHistory.length === 0 ? (
-                  <p className="text-sm text-zinc-500">No messages yet. Ask a question above.</p>
+                  <p className="text-sm text-slate-500">No messages yet. Ask a question above.</p>
                 ) : (
                   chatHistory.map((m, idx) => (
                     <div
                       key={idx}
-                      className={`rounded-md p-3 text-sm ${m.role === "user" ? "bg-white border border-zinc-200" : "bg-zinc-900 text-white"}`}
+                      className={`rounded-md p-3 text-sm ${
+                        m.role === "user"
+                          ? "border border-cyan-500/10 bg-white/[0.03] text-slate-200"
+                          : "border border-cyan-500/20 bg-cyan-500/10 text-slate-100"
+                      }`}
                     >
                       <p className="text-xs font-medium opacity-70">{m.role === "user" ? "You" : "Coach" + (m.provider ? ` • ${m.provider}` : "")}</p>
                       <p className="mt-1 whitespace-pre-wrap break-words">{m.content}</p>
@@ -414,7 +418,7 @@ export default function CoachPage() {
                     </div>
                   ))
                 )}
-                {chatLoading && <p className="text-sm text-zinc-500">Coach is thinking...</p>}
+                {chatLoading && <p className="text-sm text-slate-500">Coach is thinking...</p>}
               </div>
 
               <form onSubmit={handleChatSubmit} className="flex gap-2">
@@ -427,27 +431,27 @@ export default function CoachPage() {
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   placeholder="Ask about dust, reuse, CIOH..."
-                  className="flex-1 rounded-md border border-zinc-300 px-3 py-2 text-sm"
+                  className="flex-1 rounded-md border border-cyan-500/15 bg-white/[0.02] px-3 py-2 text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
                   autoComplete="off"
                 />
                 <button
                   type="submit"
                   disabled={chatLoading || !chatInput.trim()}
-                  className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50"
+                  className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors duration-200 hover:bg-cyan-500/20 disabled:opacity-50"
                 >
                   Send
                 </button>
               </form>
-              <p className="text-xs text-zinc-500">
-                Chat payload: <code className="rounded bg-zinc-100 px-1">message</code> + <code className="rounded bg-zinc-100 px-1">score/grade/flags/summary</code> (sanitized). No raw UTXOs.
+              <p className="text-xs text-slate-500">
+                Chat payload: <code className="rounded bg-white/[0.06] px-1 text-cyan-300">message</code> + <code className="rounded bg-white/[0.06] px-1 text-cyan-300">score/grade/flags/summary</code> (sanitized). No raw UTXOs.
               </p>
             </div>
           </>
         )}
       </Section>
 
-      <p className="text-xs text-zinc-500">
-        AI provider credentials are backend-only. Frontend never uses <code className="rounded bg-zinc-100 px-1">NEXT_PUBLIC_GEMINI_API_KEY</code> etc.
+      <p className="text-xs text-slate-500">
+        AI provider credentials are backend-only. Frontend never uses <code className="rounded bg-white/[0.06] px-1 text-cyan-300">NEXT_PUBLIC_GEMINI_API_KEY</code> etc.
       </p>
     </div>
   );

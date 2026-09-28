@@ -33,9 +33,9 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white p-6">
-      <h2 className="text-sm font-semibold text-zinc-900">{title}</h2>
-      {description && <p className="mt-1 text-xs text-zinc-500">{description}</p>}
+    <section className="rounded-lg border border-cyan-500/15 bg-white/[0.03] p-6 shadow-[0_0_35px_-18px_rgba(34,211,238,0.45)] backdrop-blur-sm">
+      <h2 className="text-sm font-semibold text-slate-100">{title}</h2>
+      {description && <p className="mt-1 text-xs text-slate-500">{description}</p>}
       <div className="mt-4 space-y-4">{children}</div>
     </section>
   );
@@ -55,7 +55,7 @@ function CopyButton({ text, label = "Copy" }: { text: string; label?: string }) 
     <button
       type="button"
       onClick={handleCopy}
-      className="rounded-md border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-700 hover:bg-zinc-50"
+      className="rounded-md border border-cyan-500/15 bg-white/[0.02] px-3 py-1 text-xs font-medium text-slate-300 transition-colors duration-200 hover:border-cyan-400/40 hover:bg-cyan-500/5 hover:text-cyan-200"
     >
       {label}
     </button>
@@ -194,37 +194,37 @@ export default function ActivityPage() {
 
   return (
     <div className="space-y-8">
-      <section aria-labelledby="activity-heading" className="rounded-lg border border-zinc-200 bg-white p-6">
+      <section aria-labelledby="activity-heading" className="rounded-lg border border-cyan-500/15 bg-white/[0.03] p-6 shadow-[0_0_35px_-18px_rgba(34,211,238,0.45)] backdrop-blur-sm">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 id="activity-heading" className="text-xl font-semibold text-zinc-900">
+            <h1 id="activity-heading" className="text-xl font-semibold text-slate-100">
               Activity — Bitcoin Testnet History
             </h1>
-            <p className="mt-2 max-w-prose text-sm text-zinc-600">
+            <p className="mt-2 max-w-prose text-sm text-slate-400">
               View public transaction history and UTXOs for any Bitcoin Testnet address. Data is fetched from the backend
-              mempool proxy (<code className="rounded bg-zinc-100 px-1">/api/btc/address/:address/txs</code> &amp;{" "}
-              <code className="rounded bg-zinc-100 px-1">/utxos</code>) and rendered directly — no fake activity is
+              mempool proxy (<code className="rounded bg-white/[0.06] px-1 text-cyan-300">/api/btc/address/:address/txs</code> &amp;{" "}
+              <code className="rounded bg-white/[0.06] px-1 text-cyan-300">/utxos</code>) and rendered directly — no fake activity is
               created.
             </p>
           </div>
-          <span className="inline-flex items-center rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800">
+          <span className="inline-flex items-center rounded-full border border-amber-500/25 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-200">
             Bitcoin Testnet — Public Data
           </span>
         </div>
-        <p className="mt-3 text-xs text-zinc-500">
+        <p className="mt-3 text-xs text-slate-500">
           Only the public address you enter is sent to the backend. Raw activity is not stored or sent to AI Coach.
         </p>
       </section>
 
       {/* Audit context — reuse, not recalculation */}
       {audit && (
-        <section className="rounded-lg border border-zinc-200 bg-zinc-50 p-4">
-          <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500">Privacy context (from Privacy page)</h2>
-          <p className="mt-1 text-sm text-zinc-700">
+        <section className="rounded-lg border border-cyan-500/10 bg-white/[0.02] p-4">
+          <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-500">Privacy context (from Privacy page)</h2>
+          <p className="mt-1 text-sm text-slate-300">
             Score {audit.score}/100 — {audit.grade} • {audit.flags.length ? audit.flags.map((f) => f.type).join(", ") : "No flags"} •{" "}
-            <span className="text-xs text-zinc-500">Analyzed locally at {new Date(audit.analyzedAt).toLocaleString()}</span>
+            <span className="text-xs text-slate-500">Analyzed locally at {new Date(audit.analyzedAt).toLocaleString()}</span>
           </p>
-          <p className="mt-1 text-xs text-zinc-500">
+          <p className="mt-1 text-xs text-slate-500">
             Displayed as context only — not recalculated here. Run a new analysis on the Privacy page to update.
           </p>
         </section>
@@ -235,7 +235,7 @@ export default function ActivityPage() {
         description="Enter a Bitcoin Testnet address to load real history. P2WPKH (tb1q...), P2TR (tb1p...), legacy (m/n/2) all supported. Nothing is persisted except the address you last queried (public, for convenience)."
       >
         <div className="space-y-2">
-          <label htmlFor="activity-address" className="block text-sm font-medium text-zinc-700">
+          <label htmlFor="activity-address" className="block text-sm font-medium text-slate-300">
             Bitcoin Testnet address (public)
           </label>
           <input
@@ -244,7 +244,7 @@ export default function ActivityPage() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="tb1q... / tb1p... / m... / n... / 2..."
-            className="w-full rounded-md border border-zinc-300 px-3 py-2 font-mono text-sm"
+            className="w-full rounded-md border border-cyan-500/15 bg-white/[0.02] px-3 py-2 font-mono text-sm text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
             autoComplete="off"
             spellCheck={false}
           />
@@ -253,21 +253,21 @@ export default function ActivityPage() {
               type="button"
               onClick={handleLoadActivity}
               disabled={fetchState === "loading"}
-              className="rounded-md bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 disabled:opacity-50"
+              className="rounded-md border border-cyan-500/20 bg-cyan-500/10 px-4 py-2 text-sm font-medium text-cyan-200 transition-colors duration-200 hover:bg-cyan-500/20 disabled:opacity-50"
             >
               {fetchState === "loading" ? "Loading..." : "Load activity"}
             </button>
-            {queriedAddress && <span className="self-center text-xs text-zinc-500">Last queried: {queriedAddress}</span>}
+            {queriedAddress && <span className="self-center text-xs text-slate-500">Last queried: {queriedAddress}</span>}
           </div>
         </div>
 
         {fetchState === "idle" && !queriedAddress && !error && (
-          <div className="rounded-md border border-dashed border-zinc-200 bg-zinc-50 p-4">
-            <p className="text-sm font-medium text-zinc-700">No address entered</p>
-            <p className="mt-1 text-sm text-zinc-600">
+          <div className="rounded-md border border-dashed border-slate-500/25 bg-white/[0.02] p-4">
+            <p className="text-sm font-medium text-slate-300">No address entered</p>
+            <p className="mt-1 text-sm text-slate-400">
               Enter a Bitcoin Testnet address above to view its public UTXOs and recent transactions.
             </p>
-            <p className="mt-1 text-xs text-zinc-500">
+            <p className="mt-1 text-xs text-slate-500">
               This is public blockchain data — no private keys, xpubs, or seeds are needed. Use an address you own on
               testnet or any public testnet address.
             </p>
@@ -276,16 +276,16 @@ export default function ActivityPage() {
 
         {fetchState === "loading" && (
           <div className="space-y-1">
-            <p className="text-sm text-zinc-500">Loading UTXOs and transactions from Bitcoin Testnet mempool proxy...</p>
-            <p className="text-xs text-zinc-500">Only the public address leaves the browser; analysis stays local.</p>
+            <p className="text-sm text-slate-500">Loading UTXOs and transactions from Bitcoin Testnet mempool proxy...</p>
+            <p className="text-xs text-slate-500">Only the public address leaves the browser; analysis stays local.</p>
           </div>
         )}
 
         {fetchState === "error" && error && (
-          <div className="rounded-md border border-red-200 bg-red-50 p-3">
-            <p className="text-sm font-medium text-red-800">Unable to load activity</p>
-            <p className="mt-1 text-sm text-red-700">{error}</p>
-            <p className="mt-1 text-xs text-zinc-600">Try a different Testnet address or check that the backend is online.</p>
+          <div className="rounded-md border border-red-500/30 bg-red-500/10 p-3">
+            <p className="text-sm font-medium text-red-300">Unable to load activity</p>
+            <p className="mt-1 text-sm text-red-300">{error}</p>
+            <p className="mt-1 text-xs text-slate-400">Try a different Testnet address or check that the backend is online.</p>
           </div>
         )}
       </Section>
@@ -299,42 +299,42 @@ export default function ActivityPage() {
           >
             <dl className="grid gap-2 text-sm sm:grid-cols-3">
               <div>
-                <dt className="text-zinc-500">Address</dt>
-                <dd className="break-all font-mono text-xs text-zinc-800">{queriedAddress}</dd>
+                <dt className="text-slate-500">Address</dt>
+                <dd className="break-all font-mono text-xs text-cyan-300">{queriedAddress}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Type</dt>
-                <dd className="text-zinc-700">{detectAddressType(queriedAddress)}</dd>
+                <dt className="text-slate-500">Type</dt>
+                <dd className="text-slate-300">{detectAddressType(queriedAddress)}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">UTXOs</dt>
-                <dd className="font-medium text-zinc-800">{utxos.length}</dd>
+                <dt className="text-slate-500">UTXOs</dt>
+                <dd className="font-medium text-slate-200">{utxos.length}</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Total balance (UTXO sum)</dt>
-                <dd className="font-mono text-zinc-800">{totalBalance.toLocaleString()} sats</dd>
+                <dt className="text-slate-500">Total balance (UTXO sum)</dt>
+                <dd className="font-mono text-cyan-300">{totalBalance.toLocaleString()} sats</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Transactions</dt>
-                <dd className="text-zinc-700">{txs.length} fetched</dd>
+                <dt className="text-slate-500">Transactions</dt>
+                <dd className="text-slate-300">{txs.length} fetched</dd>
               </div>
               <div>
-                <dt className="text-zinc-500">Network</dt>
-                <dd className="text-zinc-700">Bitcoin Testnet</dd>
+                <dt className="text-slate-500">Network</dt>
+                <dd className="text-slate-300">Bitcoin Testnet</dd>
               </div>
             </dl>
 
             {utxos.length === 0 ? (
-              <div className="rounded-md border border-zinc-200 bg-zinc-50 p-4">
-                <p className="text-sm text-zinc-600">No UTXOs found.</p>
-                <p className="mt-1 text-xs text-zinc-500">
+              <div className="rounded-md border border-cyan-500/10 bg-white/[0.02] p-4">
+                <p className="text-sm text-slate-400">No UTXOs found.</p>
+                <p className="mt-1 text-xs text-slate-500">
                   This address has no unspent outputs on testnet — it may be unused or all funds were spent.
                 </p>
               </div>
             ) : (
-              <div className="overflow-auto rounded-md border border-zinc-200">
+              <div className="overflow-auto rounded-md border border-cyan-500/10">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-zinc-50 text-zinc-500">
+                  <thead className="bg-white/[0.03] text-slate-500">
                     <tr>
                       <th className="px-3 py-2 font-medium">txid</th>
                       <th className="px-3 py-2 font-medium">vout</th>
@@ -342,7 +342,7 @@ export default function ActivityPage() {
                       <th className="px-3 py-2 font-medium">status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-200">
+                  <tbody className="divide-y divide-cyan-500/10">
                     {utxos.slice(0, 25).map((u) => {
                       const status = u.status as { confirmed?: boolean; block_height?: number; block_time?: number } | undefined;
                       return (
@@ -351,30 +351,30 @@ export default function ActivityPage() {
                             <button
                               type="button"
                               onClick={() => handleTxSelect(u.txid)}
-                              className="text-left hover:underline"
+                              className="text-left text-cyan-300 hover:underline"
                               title={u.txid}
                             >
                               {getTxidDisplay(u.txid)}
                             </button>
                           </td>
-                          <td className="px-3 py-2">{u.vout}</td>
-                          <td className="px-3 py-2">{u.value?.toLocaleString()} sats</td>
+                          <td className="px-3 py-2 text-slate-300">{u.vout}</td>
+                          <td className="px-3 py-2 text-slate-300">{u.value?.toLocaleString()} sats</td>
                           <td className="px-3 py-2 font-sans">
                             {status?.confirmed ? (
-                              <span className="rounded-full bg-green-50 px-2 py-0.5 text-green-800">confirmed</span>
+                              <span className="rounded-full border border-green-500/25 bg-green-500/10 px-2 py-0.5 text-green-300">confirmed</span>
                             ) : status ? (
-                              <span className="rounded-full bg-amber-50 px-2 py-0.5 text-amber-800">unconfirmed</span>
+                              <span className="rounded-full border border-amber-500/25 bg-amber-500/10 px-2 py-0.5 text-amber-200">unconfirmed</span>
                             ) : (
-                              <span className="text-zinc-500">—</span>
+                              <span className="text-slate-500">—</span>
                             )}
-                            {status?.block_height ? <span className="ml-2 text-zinc-500">#{status.block_height}</span> : null}
+                            {status?.block_height ? <span className="ml-2 text-slate-500">#{status.block_height}</span> : null}
                           </td>
                         </tr>
                       );
                     })}
                   </tbody>
                 </table>
-                {utxos.length > 25 && <p className="border-t px-3 py-2 text-xs text-zinc-500">Showing 25 of {utxos.length} UTXOs.</p>}
+                {utxos.length > 25 && <p className="border-t border-cyan-500/10 px-3 py-2 text-xs text-slate-500">Showing 25 of {utxos.length} UTXOs.</p>}
               </div>
             )}
           </Section>
@@ -384,9 +384,9 @@ export default function ActivityPage() {
             description="Recent transactions via GET /api/btc/address/:address/txs. Select an item to load full details via GET /api/btc/tx/:txid. All fields shown only if present in the API response."
           >
             {txs.length === 0 ? (
-              <div className="rounded-md border border-zinc-200 bg-zinc-50 p-4">
-                <p className="text-sm text-zinc-600">No transactions found.</p>
-                <p className="mt-1 text-xs text-zinc-500">
+              <div className="rounded-md border border-cyan-500/10 bg-white/[0.02] p-4">
+                <p className="text-sm text-slate-400">No transactions found.</p>
+                <p className="mt-1 text-xs text-slate-500">
                   No activity yet for this address on Bitcoin Testnet. This is the empty state — no fake history is generated.
                 </p>
               </div>
@@ -402,20 +402,26 @@ export default function ActivityPage() {
                   return (
                     <li
                       key={txid}
-                      className={`rounded-md border p-4 ${selectedTxid === txid ? "border-zinc-900" : "border-zinc-200 bg-white"}`}
+                      className={`rounded-md border p-4 ${
+                        selectedTxid === txid
+                          ? "border-cyan-400/40 bg-white/[0.03]"
+                          : "border-cyan-500/10 bg-white/[0.02]"
+                      }`}
                     >
                       <div className="flex flex-wrap items-start justify-between gap-2">
                         <button
                           type="button"
                           onClick={() => handleTxSelect(txid)}
-                          className="break-all text-left font-mono text-xs font-medium text-zinc-900 hover:underline"
+                          className="break-all text-left font-mono text-xs font-medium text-cyan-300 hover:underline"
                           title={txid}
                         >
                           {getTxidDisplay(txid)}
                         </button>
                         <span
                           className={`rounded-full border px-2 py-0.5 text-xs font-medium ${
-                            isConfirmed ? "border-green-200 bg-green-50 text-green-800" : "border-amber-200 bg-amber-50 text-amber-800"
+                            isConfirmed
+                              ? "border-green-500/25 bg-green-500/10 text-green-300"
+                              : "border-amber-500/25 bg-amber-500/10 text-amber-200"
                           }`}
                         >
                           {isConfirmed ? "confirmed" : "unconfirmed"}
@@ -423,28 +429,28 @@ export default function ActivityPage() {
                       </div>
                       <dl className="mt-2 grid gap-1 text-xs sm:grid-cols-2">
                         <div>
-                          <dt className="text-zinc-500">Block height</dt>
-                          <dd className="text-zinc-800">{status?.block_height ?? "—"}</dd>
+                          <dt className="text-slate-500">Block height</dt>
+                          <dd className="text-slate-300">{status?.block_height ?? "—"}</dd>
                         </div>
                         <div>
-                          <dt className="text-zinc-500">Time</dt>
-                          <dd className="text-zinc-800">{formatTime(status?.block_time)}</dd>
+                          <dt className="text-slate-500">Time</dt>
+                          <dd className="text-slate-300">{formatTime(status?.block_time)}</dd>
                         </div>
                         <div>
-                          <dt className="text-zinc-500">Inputs</dt>
-                          <dd className="text-zinc-800">{vin ? vin.length : "—"}</dd>
+                          <dt className="text-slate-500">Inputs</dt>
+                          <dd className="text-slate-300">{vin ? vin.length : "—"}</dd>
                         </div>
                         <div>
-                          <dt className="text-zinc-500">Outputs</dt>
-                          <dd className="text-zinc-800">{vout ? vout.length : "—"}</dd>
+                          <dt className="text-slate-500">Outputs</dt>
+                          <dd className="text-slate-300">{vout ? vout.length : "—"}</dd>
                         </div>
                         <div>
-                          <dt className="text-zinc-500">Fee</dt>
-                          <dd className="font-mono text-zinc-800">{fee !== undefined ? `${fee.toLocaleString()} sats` : "—"}</dd>
+                          <dt className="text-slate-500">Fee</dt>
+                          <dd className="font-mono text-cyan-300">{fee !== undefined ? `${fee.toLocaleString()} sats` : "—"}</dd>
                         </div>
                         <div className="flex items-center gap-2">
                           <CopyButton text={txid} label="Copy txid" />
-                          {selectedTxid === txid && <span className="text-xs text-zinc-500">Selected</span>}
+                          {selectedTxid === txid && <span className="text-xs text-slate-500">Selected</span>}
                         </div>
                       </dl>
                     </li>
@@ -455,36 +461,36 @@ export default function ActivityPage() {
 
             {/* Transaction details */}
             {selectedTxid && (
-              <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-4">
-                <h3 className="text-sm font-semibold text-zinc-900">Transaction Details</h3>
-                <p className="mt-1 break-all font-mono text-xs text-zinc-600">{selectedTxid}</p>
+              <div className="rounded-lg border border-cyan-500/10 bg-white/[0.02] p-4">
+                <h3 className="text-sm font-semibold text-slate-100">Transaction Details</h3>
+                <p className="mt-1 break-all font-mono text-xs text-slate-400">{selectedTxid}</p>
 
-                {txDetailState === "loading" && <p className="mt-3 text-sm text-zinc-500">Loading transaction details...</p>}
+                {txDetailState === "loading" && <p className="mt-3 text-sm text-slate-500">Loading transaction details...</p>}
                 {txDetailState === "error" && txDetailError && (
-                  <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3">
-                    <p className="text-sm font-medium text-red-800">{txDetailError.includes("not found") ? "Not found" : "Error"}</p>
-                    <p className="mt-1 text-sm text-red-700">{txDetailError}</p>
-                    <p className="mt-1 text-xs text-zinc-600">This transaction may not exist on testnet or the backend may be unavailable.</p>
+                  <div className="mt-3 rounded-md border border-red-500/30 bg-red-500/10 p-3">
+                    <p className="text-sm font-medium text-red-300">{txDetailError.includes("not found") ? "Not found" : "Error"}</p>
+                    <p className="mt-1 text-sm text-red-300">{txDetailError}</p>
+                    <p className="mt-1 text-xs text-slate-400">This transaction may not exist on testnet or the backend may be unavailable.</p>
                   </div>
                 )}
                 {txDetailState === "success" && txDetail != null && (
                   <div className="mt-3 space-y-3">
-                    <pre className="max-h-64 overflow-auto rounded bg-white p-3 text-xs font-mono">
+                    <pre className="max-h-64 overflow-auto rounded border border-cyan-500/10 bg-black/30 p-3 text-xs font-mono text-slate-300">
                       {JSON.stringify(txDetail, null, 2)}
                     </pre>
-                    <p className="text-xs text-zinc-500">
-                      Details from <code className="rounded bg-white px-1">GET /api/btc/tx/:txid</code> — public testnet data only.
+                    <p className="text-xs text-slate-500">
+                      Details from <code className="rounded bg-white/[0.06] px-1 text-cyan-300">GET /api/btc/tx/:txid</code> — public testnet data only.
                     </p>
                   </div>
                 )}
-                {txDetailState === "idle" && <p className="mt-2 text-xs text-zinc-500">Select a transaction above to load details.</p>}
+                {txDetailState === "idle" && <p className="mt-2 text-xs text-slate-500">Select a transaction above to load details.</p>}
               </div>
             )}
           </Section>
         </>
       )}
 
-      <p className="text-xs text-zinc-500">
+      <p className="text-xs text-slate-500">
         Demo/testnet note: This page shows only real public data for the address you enter. Simulated demo wallets are
         available on the Privacy page and are explicitly labeled — they are not shown here as if they were your wallet.
       </p>
