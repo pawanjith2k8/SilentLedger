@@ -10,7 +10,7 @@ const contactSchema = new mongoose.Schema({
   },
   hexPubkey: {
     type: String,
-    required: true,
+    default: '',
     trim: true
   },
   paymentCode: {

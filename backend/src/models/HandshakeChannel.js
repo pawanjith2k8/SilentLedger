@@ -28,12 +28,12 @@ const handshakeChannelSchema = new mongoose.Schema({
   },
   senderPaymentCode: {
     type: String,
-    required: true,
+    default: '',
     trim: true
   },
   receiverPaymentCode: {
     type: String,
-    required: true,
+    default: '',
     trim: true
   },
   sharedSecretHash: {

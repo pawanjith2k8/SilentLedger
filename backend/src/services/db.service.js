@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const dns = require('dns');
 const config = require('../config');
 
-// Ensure reliable DNS resolution for MongoDB Atlas SRV records on Windows
+// Force Google DNS for reliable Atlas SRV resolution.
+// Required on networks where ISP blocks MongoDB's SRV DNS records.
 try {
-  dns.setServers(['8.8.8.8', '1.1.1.1']);
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
 } catch (e) {
-  // Ignore if not supported in environment
+  console.warn('[DB] Could not override DNS servers:', e.message);
 }
 
 let isConnected = false;
@@ -40,7 +41,9 @@ async function connectDB() {
   try {
     mongoose.set('strictQuery', false);
     await mongoose.connect(uri, {
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 15000,
+      connectTimeoutMS: 15000,
+      family: 4,  // Force IPv4 — avoids IPv6 DNS issues on some ISPs
     });
 
     isConnected = true;

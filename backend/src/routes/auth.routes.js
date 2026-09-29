@@ -118,9 +118,18 @@ router.post('/signup', async (req, res) => {
 /**
  * DELETE /api/users/clear-all
  * Clear/reset all user accounts.
+ * RESTRICTED to non-production environments only (development + test).
  * Response: 200 OK with deleted count.
  */
 router.delete('/users/clear-all', async (req, res) => {
+  const nodeEnv = (process.env.NODE_ENV || 'development').toLowerCase();
+  if (nodeEnv === 'production') {
+    return res.status(403).json({
+      success: false,
+      error: 'Forbidden',
+      message: 'This endpoint is only available in development and test environments.'
+    });
+  }
   try {
     let deletedCount = 0;
 
